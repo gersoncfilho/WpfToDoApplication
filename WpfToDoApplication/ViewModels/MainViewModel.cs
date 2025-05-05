@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,18 @@ namespace WpfToDoApplication.ViewModels
 
         private string _title = "WPF Todo Application1";
         private string _description = "A simple WPF application to manage your tasks.";
-        private string _language = "en-US";
+        private string _selectedLanguage;
+        private ObservableCollection<string> _languages;
+
+        public ObservableCollection<string> Languages
+        {
+            get => _languages;
+            set
+            {
+                _languages = value;
+                OnPropertyChanged(nameof(Languages));
+            }
+        }
 
         public string Title
         {
@@ -45,17 +57,6 @@ namespace WpfToDoApplication.ViewModels
             }
         }
 
-        public string Language
-        {
-            get { return _language; }
-            set
-            {
-                if (_language != value)
-                {
-                    _language = value;
-                    OnPropertyChanged(nameof(Language));
-                }
-            }
-        }
+        // Removed the duplicate 'Languages' property with List<string> type to resolve ambiguity.
     }
 }
